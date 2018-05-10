@@ -11,7 +11,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +108,7 @@ public class ClendarView extends FrameLayout implements View.OnClickListener, On
         calendar.set(Calendar.DAY_OF_MONTH, 1); //设置时间到当前月份的第一天
 
         //1---代表周日  2---代表周一
-        int firstDay = calendar.get(Calendar.DAY_OF_WEEK);
+        int firstDay = calendar.get(Calendar.DAY_OF_WEEK);  //获取日期的偏移量
 //        int firstDay2 = calendar.get(Calendar.DAY_OF_MONTH);
 //        int firstDay3 = calendar.get(Calendar.DAY_OF_YEAR);
 //        Log.i("TAG", "DAY_OF_WEEK=" + firstDay);
@@ -121,7 +120,7 @@ public class ClendarView extends FrameLayout implements View.OnClickListener, On
         //仅仅美观操作，下面代码可加可不加 效果参见pc系统的日历月份调至  2018-4
         preDays = preDays == 0 ? 7 : preDays; //为了保证第一行一定是 上个月+这个月(可能没有) 的数据 ，最后一行一定是 这个月（可能没有）+下个月 的数据
 
-        calendar.add(Calendar.DAY_OF_MONTH, -preDays);
+        calendar.add(Calendar.DAY_OF_MONTH, -preDays); //将偏移量移至上个月，把上个月的几天添加到本月的日历中
 
         int maxDays = 6 * 7;
         ClendarInfo clendarInfo;
@@ -143,7 +142,7 @@ public class ClendarView extends FrameLayout implements View.OnClickListener, On
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
         //  Log.i("TAG", "dataMap=" + dataMap.toString());
-
+        //将日历数据填充到recycleview中
         if (adapter == null) {
             adapter = new DateAdapter(context, R.layout.item_calendar_layout, dateList);
             adapter.setOnItemClickListener(this);
