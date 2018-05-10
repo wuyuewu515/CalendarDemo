@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity implements ClendarView.CallB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        clendarView = findViewById(R.id.clendarView);
+        clendarView.setCallBackListener(this);
+
 
         Map<String, String> dataMap = new HashMap<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -31,9 +34,6 @@ public class MainActivity extends AppCompatActivity implements ClendarView.CallB
         dataMap.put(sdf.format(new Date(2018-1900, 5, 9)), "来啊，继续浪");
         dataMap.put(sdf.format(new Date(2018-1900, 5, 30)), "打豆豆");
 
-        clendarView = findViewById(R.id.clendarView);
-
-        clendarView.setCallBackListener(this);
         clendarView.setDataMap(dataMap);
 
     }
